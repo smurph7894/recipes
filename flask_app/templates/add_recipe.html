@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Recipe Share</title>
+</head>
+<body>
+    <div>
+        <h1>Add a New Recipe!</h1>
+        <div>
+            <a href="/recipes">back to recipes</a>
+            <a href="/users/logout">logout</a>
+        </div>
+    </div>
+    <form action="/recipes/create" method="post">
+        {% with messages = get_flashed_messages(category_filter = ['recipe']) %}
+            {% if messages %}
+                <div id="popup">
+                    {% for message in messages %}
+                        <p>{{message}}</p>
+                    {% endfor %}
+                    <button onclick="popup.remove()">Okay</button>
+                </div>
+            {% endif %}
+        {% endwith %}
+        <div>
+            <label>Name
+                <input type="text" name="name">
+            </label>
+            <label>Description
+                <input type="text" name="description">
+            </label>
+            <label>Instructions
+                <input type="text" name="instructions">
+            </label>
+        </div>
+        <div>
+            <label> Date Cooked/Made:
+                <input type="date" name="date_cooked">
+                <i class="fa fa-calendar"></i>
+            </label>
+            <label> Under 30 minutes?
+                <input type="radio" name="under_30_min" id="yes" value=1 required>
+                <label for="yes">Yes</label>
+                <input type="radio" name="under_30_min" id="no" value=0 required>
+                <label for="no">No</label>
+            </label>
+            <input type="hidden" name="user_id" value="{{session['user_id']}}">
+            <input type="submit" name="add_recipe_button" value="submit">
+        </div>
+    </form>
+</body>
+</html>

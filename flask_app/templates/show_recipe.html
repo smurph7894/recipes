@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Share</title>
+</head>
+<body>
+    <div>
+        <h1> Welcome, {{ session['user_name'] }} </h1>
+        <div>
+            <a href="/recipes">back to recipes</a>
+            <a href="/users/logout">logout</a>
+        </div>
+    </div>
+    <div>
+        <h1>{{one_recipe.name}}</h1>
+        <p>Posted by: {{one_recipe.creator.first_name}}</p>
+    </div>
+    <table>
+        <tr>
+            <th>Description:</th>
+            <td>{{one_recipe.description}}</td>
+        </tr>
+        <tr>
+            <th>Under 30 Minutes?</th>
+            <td>{{ one_recipe.cook_time_to_string_yes_no() }}</td>
+        </tr>
+        <tr>
+            <th>Instructions:</th>
+            <td>{{one_recipe.instructions}}</td>
+        </tr>
+        <tr>
+            <th>Date Made:</th>
+            <td>{{ one_recipe.date_cooked.strftime('%B %d %Y') }}</td>
+        </tr>
+    </table>
+</body>
+</html>

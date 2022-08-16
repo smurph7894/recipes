@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Share</title>
+</head>
+<body>
+    <div>
+        <div>
+            <h1>Welcome, {{ session['user_name'] }}</h1>
+        </div>
+        <div>
+            <div>
+                <p>All posted recipes:</p>
+            </div>
+            <div>
+                <a href="/users/logout">logout</a>
+                <a href="/recipes/new">+create</a>
+            </div>
+        </div>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Under</th>
+                <th>Posted By</th>
+                <th>Actions</th>
+            </tr>
+                {% for a_recipe in all_recipes %}
+                    <tr>
+                        <td>{{a_recipe.name}}</td>
+                        <td>{{ a_recipe.cook_time_to_string_yes_no() }}</td>
+                        <td>{{a_recipe.creator.first_name}}</td>
+                        <td>
+                            {% if a_recipe.user_id == session['user_id']  %}
+                                <a href="/recipes/{{a_recipe.id}}">view recipe</a>
+                                <a href="/recipes/edit/{{a_recipe.id}}">edit</a>
+                                <a href="/recipes/delete/{{a_recipe.id}}" >delete</a>
+                            {% else %}
+                                <a href="/recipes/{{a_recipe.id}}">view recipe</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

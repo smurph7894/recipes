@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register</title>
+</head>
+<body>
+    <h1>Recipe Share</h1>
+    <div>
+        <h2>Register</h2>
+        <form action="/users/register" method="post">
+            {% with messages = get_flashed_messages(category_filter = ['registration']) %}
+                {% if messages %}
+                    <div id="popup">
+                        {% for message in messages %}
+                            <p>{{message}}</p>
+                        {% endfor %}
+                        <button onclick="popup.remove()">Okay</button>
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <label> First Name:
+                <input type="text" name="first_name">
+            </label>
+            <label> Last Name:
+                <input type="text" name="last_name">
+            </label>
+            <label> Email:
+                <input type="email" name="email">
+            </label>
+            <label> Password:
+                <input type="password" name="password">
+            </label>
+            <label> Confirm Password:
+                <input type="password" name="confirm_password">
+            </label>
+            <input type="submit" name="registration_submission" value="Register">
+        </form>
+    </div>
+    <div>
+        <h2>Login</h2>
+        <form action="/users/login" method="post">
+            {% with messages = get_flashed_messages(category_filter = ['login']) %}
+                {% if messages %}
+                    <div id="popup">
+                        {% for message in messages %}
+                            <p>{{message}}</p>
+                        {% endfor %}
+                        <button onclick="popup.remove()">Okay</button>
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <label>Email:
+                <input type="email" name="email">
+            </label>
+            <label>Password:
+                <input type="password" name="password">
+            </label>
+            <input type="submit" name="login_button" value="Login">
+        </form>
+    </div>
+</body>
+</html>
